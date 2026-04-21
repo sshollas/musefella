@@ -1,10 +1,31 @@
 ---
 layout: layouts/base.njk
 title: "Bli kvitt skadedyr — raskt og riktig"
-metaDescription: "Norges mest komplette guide til skadedyrbekjempelse. Praktiske råd, produktanmeldelser og steg-for-steg-guider for norske hjem."
+metaDescription: "Praktiske råd og steg-for-steg-guider for skadedyrbekjempelse i norske hjem."
 ogType: "website"
 permalink: /
 ---
+
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.name }}",
+  "url": "{{ site.url }}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ site.name }}",
+  "url": "{{ site.url }}",
+  "email": "{{ site.contactEmail }}",
+  "description": "{{ site.description }}"
+}
+</script>
+{% endblock %}
 
 {% block trustBar %}
 {% include "components/trust-bar.njk" %}
@@ -14,7 +35,7 @@ permalink: /
 <section class="hero">
   <div class="container">
     <h1>{{ site.tagline }}</h1>
-    <p class="hero__tagline">Finn svar på skadedyrproblemet ditt — raskt, konkret og basert på FHI-retningslinjer.</p>
+    <p class="hero__tagline">Finn svar på skadedyrproblemet ditt med praktiske råd, forklaringer og steg-for-steg-guider tilpasset norske hjem.</p>
     <div class="hero__search-wrap">
       <form role="search" action="/sok/" method="get">
         <input
@@ -50,20 +71,20 @@ permalink: /
   <div class="container">
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2rem; align-items:center;">
       <div>
-        <h2>Skjeggkre? Du er ikke alene.</h2>
-        <p>Skjeggkre er nå det vanligste skadedyrproblemet i norske leiligheter. De spres via brukte møbler og pappkasser, og er ikke et tegn på dårlig rengjøring.</p>
-        <p>Den gode nyheten: de er ikke farlige, og du kan bekjempe dem selv med systematisk innsats.</p>
-        <a href="/skjeggkre/" class="btn btn--primary">Les komplett guide</a>
+        <h2>Skjeggkre? Start med riktig vurdering.</h2>
+        <p>Skjeggkre har blitt vanlige i norske boliger. De spres ofte via flytting, brukte gjenstander og emballasje, og er som regel ikke et tegn på dårlig rengjøring.</p>
+        <p>De regnes ikke som farlige for mennesker, men kan være krevende å få kontroll på. Derfor har vi samlet en nøktern oversikt over tegn, tiltak og når du bør hente hjelp.</p>
+        <a href="/skjeggkre/" class="btn btn--primary">Les guiden</a>
         <a href="/guider/bli-kvitt-skjeggkre/" class="btn btn--outline" style="margin-left:.75rem;">Steg-for-steg</a>
       </div>
       <div>
         <div class="fact-box" style="margin:0;">
           <h3>Hurtigfakta: Skjeggkre</h3>
           <dl>
-            <dt>Farlig?</dt><dd>Nei — FHI bekrefter ingen helsefare</dd>
-            <dt>Behandling</dt><dd>Diatomitt + limfeller</dd>
-            <dt>Tid</dt><dd>3–6 måneder for full kontroll</dd>
-            <dt>Kostnad DIY</dt><dd>Ca. 500–700 kr</dd>
+            <dt>Farlig?</dt><dd>Vanligvis ikke for mennesker</dd>
+            <dt>Vanlige tiltak</dt><dd>Rengjøring, overvåking og målrettet bekjempelse</dd>
+            <dt>Tid</dt><dd>Ofte flere uker eller måneder</dd>
+            <dt>Når be om hjelp?</dt><dd>Ved vedvarende eller omfattende funn</dd>
           </dl>
         </div>
       </div>
@@ -92,29 +113,11 @@ permalink: /
   </div>
 </section>
 
-<!-- Produkter -->
-<section class="section section--alt">
-  <div class="container">
-    <div class="section__header">
-      <h2 class="section__title">Testede produkter</h2>
-      <a href="/produkter/" class="section__link">Se alle →</a>
-    </div>
-    <div class="cards-grid">
-      {% for product in products %}
-      {% if product.featured %}
-      {% set cardProduct = product %}
-      {% include "components/product-card.njk" %}
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
 <!-- Trust / Om oss -->
 <section class="section" style="padding-bottom:4rem;">
   <div class="container container--article" style="text-align:center;">
     <h2>Hvorfor stole på oss?</h2>
-    <p>Vi er en redaksjonell nettsted uten skjulte agendaer. Alle produktanbefalinger er basert på reelle tester og FHI-retningslinjer. Affiliatelenker er tydelig merket — de påvirker aldri hvilke produkter vi anbefaler.</p>
+    <p>Vi er en redaksjonell innholdsside om skadedyr for norske hjem. Målet er å gjøre det enklere å forstå problemet, vurdere risiko og velge riktige tiltak.</p>
     <a href="/om/" class="btn btn--outline">Les om redaksjonen</a>
   </div>
 </section>

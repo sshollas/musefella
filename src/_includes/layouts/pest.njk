@@ -18,23 +18,6 @@ layout: layouts/base.njk
   "description": "{{ metaDescription }}"
 }
 </script>
-{% if faq %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {% for item in faq %}
-    {
-      "@type": "Question",
-      "name": "{{ item.q }}",
-      "acceptedAnswer": { "@type": "Answer", "text": "{{ item.a | replace('"', '\\"') }}" }
-    }{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ]
-}
-</script>
-{% endif %}
 {% if steps %}
 <script type="application/ld+json">
 {
@@ -79,28 +62,6 @@ layout: layouts/base.njk
         </div>
       </header>
 
-      {% if recommendedProduct %}
-      {% set prodData = products | selectattr("id", "equalto", recommendedProduct.id) | first %}
-      <div class="recommended-product">
-        <img
-          src="{{ recommendedProduct.image or '/assets/img/placeholder.jpg' }}"
-          alt="{{ recommendedProduct.name }}"
-          class="recommended-product__img"
-          width="80" height="80">
-        <div>
-          <div class="recommended-product__label">Redaksjonens anbefaling</div>
-          <div class="recommended-product__name">{{ recommendedProduct.name }}</div>
-          <div class="recommended-product__price">{{ recommendedProduct.price }} kr</div>
-          <a href="{{ recommendedProduct.url }}" class="btn btn--primary btn--sm" rel="nofollow sponsored" target="_blank">
-            Se pris og kjøp
-          </a>
-          {% if recommendedProduct.affiliate %}
-            <div class="affiliate-note">(affiliatelenke)</div>
-          {% endif %}
-        </div>
-      </div>
-      {% endif %}
-
       {{ content | safe }}
 
       {% if faq %}
@@ -120,9 +81,6 @@ layout: layouts/base.njk
       </nav>
       {% endif %}
 
-      {% if recommendedProduct %}
-      {% include "components/cta-box.njk" %}
-      {% endif %}
     </aside>
   </div>
 </div>

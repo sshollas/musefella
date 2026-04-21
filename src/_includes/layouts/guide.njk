@@ -39,23 +39,6 @@ layout: layouts/base.njk
 }
 </script>
 {% endif %}
-{% if faq %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {% for item in faq %}
-    {
-      "@type": "Question",
-      "name": "{{ item.q }}",
-      "acceptedAnswer": { "@type": "Answer", "text": "{{ item.a | replace('"', '\\"') }}" }
-    }{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ]
-}
-</script>
-{% endif %}
 {% endblock %}
 
 <div class="container" style="padding-top:0; padding-bottom:4rem;">

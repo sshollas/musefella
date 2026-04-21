@@ -22,13 +22,6 @@ breadcrumb:
   {% endfor %}
 </ul>
 
-<h2>Produkter</h2>
-<ul>
-  {% for product in collections.produkter %}
-  <li><a href="{{ product.url }}">{{ product.data.title }}</a></li>
-  {% endfor %}
-</ul>
-
 <h2>Kategorier</h2>
 <ul>
   {% for kategori in collections.kategorier %}

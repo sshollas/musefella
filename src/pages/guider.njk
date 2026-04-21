@@ -1,0 +1,23 @@
+---
+layout: layouts/page.njk
+title: "Guider"
+metaDescription: "Steg-for-steg-guider til forebygging og bekjempelse av skadedyr i norske hjem."
+permalink: /guider/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Guider" }
+---
+
+<p>Praktiske guider for deg som vil forebygge eller håndtere skadedyr på riktig måte. Her finner du steg-for-steg-oppsett, råd om plassering av feller og enkle tiltak du kan gjøre selv.</p>
+
+<div class="guide-list" style="margin-top:2rem;">
+  {% for guide in collections.guider %}
+  <a href="{{ guide.url }}" class="guide-item">
+    <span class="guide-item__icon">📋</span>
+    <div>
+      <div class="guide-item__title">{{ guide.data.title }}</div>
+      <div class="guide-item__meta">{{ guide.data.difficulty or "middels" }}{% if guide.data.timeRequired %} · {{ guide.data.timeRequired }}{% endif %}</div>
+    </div>
+  </a>
+  {% endfor %}
+</div>

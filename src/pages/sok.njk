@@ -1,0 +1,120 @@
+---
+layout: layouts/page.njk
+title: "Søk"
+metaDescription: "Søk i guider, skadedyr og kategorier på musefella.no."
+permalink: /sok/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Søk" }
+---
+
+<p>Bruk søket for å finne skadedyr, guider og kategorier. Resultatene filtreres direkte på siden.</p>
+
+<form role="search" action="/sok/" method="get" style="margin:2rem 0;">
+  <label for="site-search" class="sr-only">Søk på siden</label>
+  <div style="display:flex; gap:.75rem; flex-wrap:wrap;">
+    <input
+      id="site-search"
+      class="search-input"
+      type="search"
+      name="q"
+      value=""
+      placeholder="Søk etter skjeggkre, mus, guider eller kategorier…"
+      aria-label="Søk på siden"
+      style="min-width:min(100%, 36rem); flex:1 1 20rem;">
+    <button class="btn btn--primary" type="submit">Søk</button>
+  </div>
+</form>
+
+<p id="search-status" class="text-muted" aria-live="polite"></p>
+
+<section class="search-section" data-search-section>
+  <div class="section__header">
+    <h2 class="section__title">Skadedyr</h2>
+  </div>
+  <div class="cards-grid">
+    {% for pest in pests %}
+    <div data-search-item data-search-text="{{ pest.name | lower }} {{ pest.shortDescription | lower }} {{ pest.category | lower }} {{ pest.slug | lower }}">
+      {% set cardPest = pest %}
+      {% include "components/pest-card.njk" %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="search-section section" data-search-section>
+  <div class="section__header">
+    <h2 class="section__title">Guider</h2>
+  </div>
+  <div class="guide-list">
+    {% for guide in collections.guider %}
+    <div data-search-item data-search-text="{{ guide.data.title | lower }} {{ guide.data.metaDescription | default('') | lower }}">
+      <a href="{{ guide.url }}" class="guide-item">
+        <span class="guide-item__icon">📋</span>
+        <div>
+          <div class="guide-item__title">{{ guide.data.title }}</div>
+          <div class="guide-item__meta">{{ guide.data.difficulty or "middels" }}{% if guide.data.timeRequired %} · {{ guide.data.timeRequired }}{% endif %}</div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="search-section section" data-search-section>
+  <div class="section__header">
+    <h2 class="section__title">Kategorier</h2>
+  </div>
+  <div class="cards-grid">
+    {% for kategori in collections.kategorier %}
+    <div data-search-item data-search-text="{{ kategori.data.title | lower }} {{ kategori.data.metaDescription | lower }}">
+      <a href="{{ kategori.url }}" class="pest-card">
+        <div class="pest-card__body">
+          <div class="pest-card__name">{{ kategori.data.title }}</div>
+          <p class="pest-card__description">{{ kategori.data.metaDescription }}</p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const query = (params.get('q') || '').trim().toLowerCase();
+  const input = document.getElementById('site-search');
+  const status = document.getElementById('search-status');
+  const items = Array.from(document.querySelectorAll('[data-search-item]'));
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  if (input) {
+    input.value = params.get('q') || '';
+  }
+
+  const applySearch = (term) => {
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const haystack = item.getAttribute('data-search-text') || '';
+      const match = !term || haystack.includes(term);
+      item.hidden = !match;
+      if (match) visibleCount += 1;
+    });
+
+    sections.forEach((section) => {
+      const visibleItems = section.querySelectorAll('[data-search-item]:not([hidden])').length;
+      section.hidden = visibleItems === 0;
+    });
+
+    if (!term) {
+      status.textContent = 'Viser alt innhold. Skriv inn et søk for å filtrere resultatene.';
+      return;
+    }
+
+    status.textContent = visibleCount > 0
+      ? `Fant ${visibleCount} treff for "${params.get('q')}"`
+      : `Ingen treff for "${params.get('q')}". Prøv et annet søkord.`;
+  };
+
+  applySearch(query);
+</script>

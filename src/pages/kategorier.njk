@@ -1,0 +1,22 @@
+---
+layout: layouts/page.njk
+title: "Kategorier"
+metaDescription: "Utforsk skadedyr etter kategori: gnagere, insekter og krek."
+permalink: /kategorier/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Kategorier" }
+---
+
+<p>Bruk kategoriene for å finne relaterte skadedyr og guider raskere. Dette er den enkleste inngangen hvis du ikke er helt sikker på hvilket skadedyr du har.</p>
+
+<div class="cards-grid" style="margin-top:2rem;">
+  {% for kategori in collections.kategorier %}
+  <a href="{{ kategori.url }}" class="pest-card">
+    <div class="pest-card__body">
+      <div class="pest-card__name">{{ kategori.data.title }}</div>
+      <p class="pest-card__description">{{ kategori.data.metaDescription }}</p>
+    </div>
+  </a>
+  {% endfor %}
+</div>

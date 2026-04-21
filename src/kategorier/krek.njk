@@ -1,7 +1,7 @@
 ---
 layout: layouts/category.njk
 title: "Krek — skjeggkre og sølvkre"
-metaDescription: "Alt om krek i norske hjem. Komplett oversikt over skjeggkre og sølvkre: identifisering, bekjempelse og produkter."
+metaDescription: "Alt om krek i norske hjem. Komplett oversikt over skjeggkre og sølvkre: identifisering, bekjempelse og guider."
 date: 2025-01-01
 permalink: /kategorier/krek/
 ---
@@ -40,13 +40,3 @@ permalink: /kategorier/krek/
   <li><a href="/guider/kjerringraad-skjeggkre/">Kjerringråd mot skjeggkre — hva virker?</a></li>
   <li><a href="/guider/skjeggkre-vaskemaskin/">Skjeggkre og vaskemaskin</a></li>
 </ul>
-
-<h2>Produkter</h2>
-<div class="cards-grid">
-  {% for product in products %}
-  {% if "skjeggkre" in product.pests %}
-  {% set cardProduct = product %}
-  {% include "components/product-card.njk" %}
-  {% endif %}
-  {% endfor %}
-</div>

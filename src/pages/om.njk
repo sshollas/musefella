@@ -1,27 +1,47 @@
 ---
 layout: layouts/page.njk
 title: "Om musefella.no"
-metaDescription: "Om redaksjonen bak musefella.no — norsk skadedyrbekjempelse for forbrukere. Redaksjonelle retningslinjer og affiliate-informasjon."
+metaDescription: "Om redaksjonen bak musefella.no — norsk skadedyrbekjempelse for forbrukere og våre redaksjonelle retningslinjer."
 permalink: /om/
 breadcrumb:
   - { label: "Hjem", url: "/" }
   - { label: "Om oss" }
 ---
 
-<p>musefella.no er en uavhengig innholdsplattform om skadedyrbekjempelse for norske forbrukere. Vi skriver praktiske guider og tester produkter for å hjelpe norske huseiere og leieboere med å håndtere skadedyr raskt og riktig.</p>
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "{{ title }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "description": "{{ metaDescription }}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ site.name }}",
+  "url": "{{ site.url }}",
+  "email": "{{ site.contactEmail }}",
+  "description": "{{ site.description }}"
+}
+</script>
+{% endblock %}
+
+<p>musefella.no er en innholdsplattform om skadedyr i norske hjem. Vi skriver praktiske guider og forklarende innhold for å hjelpe huseiere og leieboere med å forstå problemet, vurdere risiko og velge riktige neste steg.</p>
 
 <h2>Redaksjonelle retningslinjer</h2>
 <p>Alt innhold på musefella.no er skrevet og kvalitetssikret av vår redaksjon. Vi følger disse prinsippene:</p>
 <ul>
-  <li><strong>Faktabasert</strong> — vi baserer oss på FHI-retningslinjer, Miljødirektoratets anbefalinger og produsent-dokumentasjon</li>
-  <li><strong>Transparent</strong> — alle affiliatelenker er tydelig merket med "(affiliatelenke)"</li>
-  <li><strong>Uavhengig</strong> — vi tar ikke betaling for redaksjonell omtale</li>
-  <li><strong>Oppdatert</strong> — vi gjennomgår og oppdaterer innholdet jevnlig</li>
+  <li><strong>Faktabasert</strong> — vi bygger innhold på offentlige råd, fagkilder og dokumenterte produktopplysninger der det er relevant</li>
+  <li><strong>Tydelig avgrenset</strong> — vi skiller mellom generelle råd, praktiske tiltak du kan prøve selv og når profesjonell hjelp er mer riktig</li>
+  <li><strong>Oppdatert</strong> — vi gjennomgår og justerer innholdet når vi oppdager feil, utdaterte råd eller behov for presiseringer</li>
 </ul>
 
-<h2>Affiliate-informasjon</h2>
-<p>{{ site.affiliateDisclaimer }}</p>
-<p>Hvilke produkter vi anbefaler bestemmes utelukkende av redaksjonell vurdering — ikke av kommersielle avtaler. Vi vurderer produkter basert på effektivitet, sikkerhet, pris og tilgjengelighet i Norge.</p>
+<h2>Innhold og avgrensning</h2>
+<p>Per nå publiserer musefella.no kun innholdssider, guider og forklarende stoff. Produkt- og affiliateløsninger er midlertidig deaktivert, og siden fungerer for tiden som en ren innholdsside.</p>
 
 <h2>Kontakt</h2>
 <p>Spørsmål, feil eller innspill? Send oss en e-post: <a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a></p>

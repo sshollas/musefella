@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} — {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ metaDescription or site.description }}">
+  {% if noindex %}<meta name="robots" content="noindex,follow">{% endif %}
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
   <!-- Open Graph -->
@@ -27,21 +28,6 @@
   <meta name="language" content="Norwegian">
 
   <link rel="stylesheet" href="/assets/css/main.css">
-
-  <!-- Structured data: WebSite -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "{{ site.name }}",
-    "url": "{{ site.url }}",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "{{ site.url }}/sok/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
 
   {% block schema %}{% endblock %}
 </head>

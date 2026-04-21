@@ -1,0 +1,34 @@
+---
+layout: layouts/page.njk
+title: "Skadedyr"
+metaDescription: "Oversikt over vanlige skadedyr i norske hjem, med guider til identifisering, risiko og bekjempelse."
+permalink: /skadedyr/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Skadedyr" }
+---
+
+<p>Her finner du oversikter over de vanligste skadedyrene i norske hjem. Velg skadedyret du vil lese om for å få råd om tegn, risiko, forebygging og bekjempelse.</p>
+
+<div class="cards-grid" style="margin-top:2rem;">
+  {% for pest in pests %}
+  {% set cardPest = pest %}
+  {% include "components/pest-card.njk" %}
+  {% endfor %}
+</div>
+
+<section class="section" style="padding-bottom:0;">
+  <div class="section__header">
+    <h2 class="section__title">Kategorier</h2>
+  </div>
+  <div class="cards-grid">
+    {% for kategori in collections.kategorier %}
+    <a href="{{ kategori.url }}" class="pest-card">
+      <div class="pest-card__body">
+        <div class="pest-card__name">{{ kategori.data.title }}</div>
+        <p class="pest-card__description">{{ kategori.data.metaDescription }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>

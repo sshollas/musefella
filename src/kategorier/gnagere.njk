@@ -1,7 +1,7 @@
 ---
 layout: layouts/category.njk
 title: "Gnagere — mus og rotter"
-metaDescription: "Komplett oversikt over mus og rotter i norske hjem. Identifisering, forskjeller, bekjempelse og produkter."
+metaDescription: "Komplett oversikt over mus og rotter i norske hjem. Identifisering, forskjeller, bekjempelse og guider."
 date: 2025-01-01
 permalink: /kategorier/gnagere/
 ---
@@ -30,16 +30,6 @@ permalink: /kategorier/gnagere/
   <li><a href="/guider/sette-opp-musefeller/">Slik setter du opp musefeller riktig</a></li>
   <li><a href="/guider/forebygge-skadedyr/">Forebygg mus og skadedyr</a></li>
 </ul>
-
-<h2>Produkter</h2>
-<div class="cards-grid">
-  {% for product in products %}
-  {% if "mus" in product.pests %}
-  {% set cardProduct = product %}
-  {% include "components/product-card.njk" %}
-  {% endif %}
-  {% endfor %}
-</div>
 
 <h2>Mus vs. rotter — slik skiller du dem</h2>
 <div style="overflow-x:auto;">
