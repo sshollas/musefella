@@ -1,0 +1,43 @@
+---
+layout: layouts/page.njk
+title: "Sitemap"
+metaDescription: "Oversikt over alle sider på musefella.no."
+permalink: /sitemap/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Sitemap" }
+---
+
+<h2>Skadedyr</h2>
+<ul>
+  {% for pest in collections.skadedyr %}
+  <li><a href="{{ pest.url }}">{{ pest.data.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<h2>Guider</h2>
+<ul>
+  {% for guide in collections.guider %}
+  <li><a href="{{ guide.url }}">{{ guide.data.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<h2>Produkter</h2>
+<ul>
+  {% for product in collections.produkter %}
+  <li><a href="{{ product.url }}">{{ product.data.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<h2>Kategorier</h2>
+<ul>
+  {% for kategori in collections.kategorier %}
+  <li><a href="{{ kategori.url }}">{{ kategori.data.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<h2>Om siden</h2>
+<ul>
+  <li><a href="/om/">Om musefella.no</a></li>
+  <li><a href="/kontakt/">Kontakt</a></li>
+</ul>

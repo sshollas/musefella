@@ -10,7 +10,7 @@
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",
     "luxon": "^3.4.4",
-    "@11ty/eleventy-plugin-sitemap": "^1.2.0"
+    "resend": "^4.0.0"
   },
   "devDependencies": {}
 }

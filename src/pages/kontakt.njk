@@ -1,0 +1,122 @@
+---
+layout: layouts/page.njk
+title: "Kontakt oss"
+metaDescription: "Ta kontakt med redaksjonen på musefella.no. Vi svarer på spørsmål om skadedyrbekjempelse, produkttester og innholdsfeil."
+permalink: /kontakt/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Kontakt" }
+---
+
+<p>Vi hører gjerne fra deg — enten det er spørsmål om skadedyrbekjempelse, feil i innholdet vårt, eller produktinformasjon vi bør oppdatere.</p>
+
+<form id="kontakt-form" style="margin: 2rem 0;" novalidate>
+  <div style="display:grid; gap:1rem;">
+
+    <div>
+      <label for="navn" style="display:block; font-weight:600; margin-bottom:.3rem;">Navn <span aria-hidden="true">*</span></label>
+      <input type="text" id="navn" name="navn" required autocomplete="name"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem;">
+    </div>
+
+    <div>
+      <label for="epost" style="display:block; font-weight:600; margin-bottom:.3rem;">E-post <span aria-hidden="true">*</span></label>
+      <input type="email" id="epost" name="epost" required autocomplete="email"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem;">
+    </div>
+
+    <div>
+      <label for="emne" style="display:block; font-weight:600; margin-bottom:.3rem;">Emne</label>
+      <input type="text" id="emne" name="emne" autocomplete="off"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem;">
+    </div>
+
+    <div>
+      <label for="melding" style="display:block; font-weight:600; margin-bottom:.3rem;">Melding <span aria-hidden="true">*</span></label>
+      <textarea id="melding" name="melding" required rows="5"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem; resize:vertical;"></textarea>
+    </div>
+
+    <div id="kontakt-status" role="alert" aria-live="polite" style="display:none;"></div>
+
+    <div>
+      <button type="submit" class="btn btn--primary" id="kontakt-submit">Send melding</button>
+    </div>
+  </div>
+</form>
+
+<script>
+(function () {
+  const form = document.getElementById('kontakt-form');
+  const status = document.getElementById('kontakt-status');
+  const submit = document.getElementById('kontakt-submit');
+
+  function showStatus(message, isError) {
+    status.textContent = message;
+    status.style.display = 'block';
+    status.style.padding = '.75rem 1rem';
+    status.style.borderRadius = 'var(--radius)';
+    status.style.fontSize = '.9rem';
+    if (isError) {
+      status.style.background = 'var(--color-warning-bg)';
+      status.style.color = '#7a2c18';
+    } else {
+      status.style.background = 'var(--color-accent-bg)';
+      status.style.color = '#1a4033';
+    }
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    status.style.display = 'none';
+    submit.disabled = true;
+    submit.textContent = 'Sender…';
+
+    const body = {
+      navn: form.navn.value.trim(),
+      epost: form.epost.value.trim(),
+      emne: form.emne.value.trim(),
+      melding: form.melding.value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/kontakt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        form.reset();
+        showStatus('Takk! Meldingen din er sendt. Vi svarer innen 2–3 virkedager.', false);
+      } else {
+        showStatus(data.error || 'Noe gikk galt. Prøv igjen.', true);
+      }
+    } catch {
+      showStatus('Nettverksfeil. Sjekk tilkoblingen og prøv igjen.', true);
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Send melding';
+    }
+  });
+})();
+</script>
+
+<h2>Hva vi kan hjelpe med</h2>
+<ul>
+  <li>Spørsmål om skadedyrbekjempelse og produktvalg</li>
+  <li>Feil eller utdatert informasjon på siden</li>
+  <li>Produkter vi bør teste og anmelde</li>
+  <li>Samarbeid og mediainspørsel</li>
+</ul>
+
+<h2>Hva vi ikke kan hjelpe med</h2>
+<ul>
+  <li>Direkte diagnose av skadedyrproblem (vi er ikke sertifiserte skadedyrbekjempere)</li>
+  <li>Anbefalinger av bestemte lokale skadedyrfirmaer</li>
+</ul>
+
+<div class="alert alert--info">
+  <strong>Alvorlig skadedyrproblem?</strong> Kontakt et lokalt skadedyrfirma direkte. Finn godkjente firma via <a href="https://www.skadedyrlauget.no" target="_blank" rel="noopener">Skadedyrlauget</a>.
+</div>

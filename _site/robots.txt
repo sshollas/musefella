@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /personvern/
+Disallow: /takk/
+
+Sitemap: https://musefella.no/sitemap.xml

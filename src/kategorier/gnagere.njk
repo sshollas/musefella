@@ -1,0 +1,58 @@
+---
+layout: layouts/category.njk
+title: "Gnagere — mus og rotter"
+metaDescription: "Komplett oversikt over mus og rotter i norske hjem. Identifisering, forskjeller, bekjempelse og produkter."
+date: 2025-01-01
+permalink: /kategorier/gnagere/
+---
+
+<div class="cards-grid">
+  <a href="/mus/" class="pest-card">
+    <div class="pest-card__img-wrap"><span class="pest-card__icon">🐭</span></div>
+    <div class="pest-card__body">
+      <div class="pest-card__name">Mus</div>
+      <p class="pest-card__description">Husmus er vanligst om høsten og vinteren. Handle raskt — de formerer seg fort.</p>
+      <span class="pest-card__badge badge--medium">Farenivå: middels</span>
+    </div>
+  </a>
+  <a href="/rotter/" class="pest-card">
+    <div class="pest-card__img-wrap"><span class="pest-card__icon">🐀</span></div>
+    <div class="pest-card__body">
+      <div class="pest-card__name">Rotter</div>
+      <p class="pest-card__description">Rotter er mer alvorlig enn mus. Utendørs rotteangrep — kontakt kommunen.</p>
+      <span class="pest-card__badge badge--high">Farenivå: høy</span>
+    </div>
+  </a>
+</div>
+
+<h2>Guider</h2>
+<ul>
+  <li><a href="/guider/sette-opp-musefeller/">Slik setter du opp musefeller riktig</a></li>
+  <li><a href="/guider/forebygge-skadedyr/">Forebygg mus og skadedyr</a></li>
+</ul>
+
+<h2>Produkter</h2>
+<div class="cards-grid">
+  {% for product in products %}
+  {% if "mus" in product.pests %}
+  {% set cardProduct = product %}
+  {% include "components/product-card.njk" %}
+  {% endif %}
+  {% endfor %}
+</div>
+
+<h2>Mus vs. rotter — slik skiller du dem</h2>
+<div style="overflow-x:auto;">
+<table class="comparison-table">
+  <thead>
+    <tr><th>Egenskap</th><th>Husmus</th><th>Rotte</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Størrelse</td><td>6–9 cm</td><td>20–25 cm</td></tr>
+    <tr><td>Avføring</td><td>2–5 mm</td><td>10–15 mm</td></tr>
+    <tr><td>Vekt</td><td>15–30 gram</td><td>250–500 gram</td></tr>
+    <tr><td>Aktivitet</td><td>Nattaktiv</td><td>Nattaktiv</td></tr>
+    <tr><td>Ansvar (ute)</td><td>Huseier</td><td>Kommunen + huseier</td></tr>
+  </tbody>
+</table>
+</div>

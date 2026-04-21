@@ -1,0 +1,52 @@
+---
+layout: layouts/category.njk
+title: "Krek — skjeggkre og sølvkre"
+metaDescription: "Alt om krek i norske hjem. Komplett oversikt over skjeggkre og sølvkre: identifisering, bekjempelse og produkter."
+date: 2025-01-01
+permalink: /kategorier/krek/
+---
+
+<div class="cards-grid">
+  <a href="/skjeggkre/" class="pest-card">
+    <div class="pest-card__img-wrap"><span class="pest-card__icon">🦟</span></div>
+    <div class="pest-card__body">
+      <div class="pest-card__name">Skjeggkre</div>
+      <p class="pest-card__description">Gråhvit krek som trives i tørre, varme rom. Norges mest søkte skadedyr.</p>
+      <span class="pest-card__badge badge--low">Farenivå: lav</span>
+    </div>
+  </a>
+  <a href="/solvkre/" class="pest-card">
+    <div class="pest-card__img-wrap"><span class="pest-card__icon">🪲</span></div>
+    <div class="pest-card__body">
+      <div class="pest-card__name">Sølvkre</div>
+      <p class="pest-card__description">Metallisk sølvfarget krek som varsler om fuktproblemer i badet eller kjøkkenet.</p>
+      <span class="pest-card__badge badge--low">Farenivå: lav</span>
+    </div>
+  </a>
+</div>
+
+<h2>Sammenligning og diagnostisering</h2>
+<ul>
+  <li><a href="/skjeggkre-vs-solvkre/">Skjeggkre vs sølvkre — slik skiller du dem</a></li>
+  <li><a href="/skjeggkre-egg/">Skjeggkre-egg: klekketid og utseende</a></li>
+  <li><a href="/er-skjeggkre-farlig/">Er skjeggkre farlig?</a></li>
+  <li><a href="/skjeggkre-temperatur/">Ved hvilken temperatur dør skjeggkre?</a></li>
+</ul>
+
+<h2>Bekjempelsesguider</h2>
+<ul>
+  <li><a href="/guider/bli-kvitt-skjeggkre/">Bli kvitt skjeggkre — steg for steg</a></li>
+  <li><a href="/guider/bli-kvitt-solvkre/">Bli kvitt sølvkre</a></li>
+  <li><a href="/guider/kjerringraad-skjeggkre/">Kjerringråd mot skjeggkre — hva virker?</a></li>
+  <li><a href="/guider/skjeggkre-vaskemaskin/">Skjeggkre og vaskemaskin</a></li>
+</ul>
+
+<h2>Produkter</h2>
+<div class="cards-grid">
+  {% for product in products %}
+  {% if "skjeggkre" in product.pests %}
+  {% set cardProduct = product %}
+  {% include "components/product-card.njk" %}
+  {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,70 @@
+---
+layout: layouts/page.njk
+title: "Personvernerklæring"
+metaDescription: "Personvernerklæring for musefella.no. Informasjon om hvilke data vi samler inn, hvordan de brukes og dine rettigheter."
+permalink: /personvern/
+breadcrumb:
+  - { label: "Hjem", url: "/" }
+  - { label: "Personvern" }
+---
+
+<p><em>Sist oppdatert: 1. januar 2025</em></p>
+
+<h2>Behandlingsansvarlig</h2>
+<p>musefella.no er behandlingsansvarlig for personopplysninger som samles inn via dette nettstedet. Kontakt: <a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a></p>
+
+<h2>Hvilke data samler vi inn?</h2>
+<h3>Automatisk innsamling (tekniske data)</h3>
+<p>Når du besøker musefella.no samles teknisk informasjon inn automatisk via vår analyseplattform:</p>
+<ul>
+  <li>IP-adresse (anonymisert)</li>
+  <li>Hvilke sider du besøker og når</li>
+  <li>Hvilken enhet og nettleser du bruker</li>
+  <li>Hvilken side du kom fra</li>
+</ul>
+<p>Disse dataene brukes utelukkende til å forbedre innholdet på siden og forstå hvilke emner brukerne finner nyttige.</p>
+
+<h3>Kontaktskjema / e-post</h3>
+<p>Sender du oss e-post, lagres e-postadressen og innholdet i e-posten for å besvare din henvendelse. Vi deler ikke disse opplysningene med tredjeparter.</p>
+
+<h2>Informasjonskapsler (cookies)</h2>
+<p>musefella.no bruker informasjonskapsler til:</p>
+<ul>
+  <li>Anonym besøksstatistikk (Google Analytics / Plausible)</li>
+  <li>Husking av brukerpreferanser</li>
+</ul>
+<p>Du kan slette og blokkere informasjonskapsler i nettleserens innstillinger. Siden vil fungere uten ikke-nødvendige cookies.</p>
+
+{# Fase 2: Consent-banner (kommentert ut — klar struktur)
+<div id="consent-banner" style="display:none;">
+  <p>Vi bruker informasjonskapsler for statistikk. <button id="consent-accept">Godta</button> <button id="consent-decline">Avvis</button></p>
+</div>
+<script>
+// Consent-logikk implementeres her ved aktivering
+// if (localStorage.getItem('cookieConsent') !== 'accepted') {
+//   document.getElementById('consent-banner').style.display = 'block';
+// }
+</script>
+#}
+
+<h2>Affiliatelenker og tredjeparter</h2>
+<p>musefella.no inneholder affiliatelenker til nettbutikker. Når du klikker på en affiliatelenke, kan den aktuelle nettbutikken sette informasjonskapsler. Vi har ikke kontroll over tredjeparters datapraksis — se deres personvernerklæringer for detaljer.</p>
+
+<h2>Dine rettigheter</h2>
+<p>Under GDPR har du rett til:</p>
+<ul>
+  <li>Innsyn i hvilke personopplysninger vi har om deg</li>
+  <li>Retting av feilaktige opplysninger</li>
+  <li>Sletting av opplysninger vi ikke lenger trenger</li>
+  <li>Å klage til Datatilsynet: <a href="https://www.datatilsynet.no" target="_blank" rel="noopener">datatilsynet.no</a></li>
+</ul>
+
+<p>Send oss en e-post på <a href="mailto:{{ site.contactEmail }}">{{ site.contactEmail }}</a> for å benytte disse rettighetene.</p>
+
+<h2>Lagring og sikkerhet</h2>
+<p>Personopplysninger lagres sikkert og slettes når de ikke lenger er nødvendige for formålet de ble samlet inn for. Vi bruker etablerte skyplattformer med høye sikkerhetsstandarder.</p>
+
+{# Fase 2: Hreflang for svensk versjon (kommentert ut)
+<link rel="alternate" hreflang="sv" href="https://DOMENE.se/integritetspolicy/">
+<link rel="alternate" hreflang="nb" href="https://musefella.no/personvern/">
+#}
