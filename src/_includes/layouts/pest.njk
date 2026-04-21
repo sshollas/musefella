@@ -1,0 +1,128 @@
+---
+layout: layouts/base.njk
+---
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ title }}",
+  "datePublished": "{{ date | isoDate }}",
+  "dateModified": "{{ (updated or date) | isoDate }}",
+  "author": { "@type": "Organization", "name": "{{ site.name }}" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "logo": { "@type": "ImageObject", "url": "{{ site.url }}/assets/logo.png" }
+  },
+  "description": "{{ metaDescription }}"
+}
+</script>
+{% if faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in faq %}
+    {
+      "@type": "Question",
+      "name": "{{ item.q }}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{{ item.a | replace('"', '\\"') }}" }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% if steps %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{{ title }}",
+  "description": "{{ metaDescription }}",
+  "step": [
+    {% for step in steps %}
+    {
+      "@type": "HowToStep",
+      "name": "{{ step.name }}",
+      "text": "{{ step.text | replace('"', '\\"') }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
+<div class="container" style="padding-top:0; padding-bottom:4rem;">
+  {% set breadcrumb = [
+    { label: "Hjem", url: "/" },
+    { label: "Skadedyr", url: "/skadedyr/" },
+    { label: title }
+  ] %}
+  {% include "components/breadcrumb.njk" %}
+
+  <div class="article-layout">
+    <div class="article-content">
+      <header class="article-header">
+        <h1>{{ title }}</h1>
+        <div class="article-meta">
+          <span>Oppdatert {{ (updated or date) | readableDate }}</span>
+          <span class="meta-tag">Skadedyr</span>
+          {% if dangerLevel %}
+            <span class="meta-tag {% if dangerLevel == 'høy' %}meta-tag--warning{% endif %}">
+              Fare: {{ dangerLevel }}
+            </span>
+          {% endif %}
+        </div>
+      </header>
+
+      {% if recommendedProduct %}
+      {% set prodData = products | selectattr("id", "equalto", recommendedProduct.id) | first %}
+      <div class="recommended-product">
+        <img
+          src="{{ recommendedProduct.image or '/assets/img/placeholder.jpg' }}"
+          alt="{{ recommendedProduct.name }}"
+          class="recommended-product__img"
+          width="80" height="80">
+        <div>
+          <div class="recommended-product__label">Redaksjonens anbefaling</div>
+          <div class="recommended-product__name">{{ recommendedProduct.name }}</div>
+          <div class="recommended-product__price">{{ recommendedProduct.price }} kr</div>
+          <a href="{{ recommendedProduct.url }}" class="btn btn--primary btn--sm" rel="nofollow sponsored" target="_blank">
+            Se pris og kjøp
+          </a>
+          {% if recommendedProduct.affiliate %}
+            <div class="affiliate-note">(affiliatelenke)</div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      {{ content | safe }}
+
+      {% if faq %}
+        {% include "components/faq-block.njk" %}
+      {% endif %}
+    </div>
+
+    <aside class="article-sidebar">
+      {% if toc %}
+      <nav class="toc" aria-label="Innholdsfortegnelse">
+        <h3>Innhold</h3>
+        <ol>
+          {% for item in toc %}
+          <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
+
+      {% if recommendedProduct %}
+      {% include "components/cta-box.njk" %}
+      {% endif %}
+    </aside>
+  </div>
+</div>

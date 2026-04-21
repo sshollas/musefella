@@ -1,0 +1,20 @@
+{# Call-to-action boks for sidebar eller inline bruk #}
+{% if recommendedProduct %}
+<div class="toc" style="text-align:center;">
+  <p style="font-size:.75rem; text-transform:uppercase; letter-spacing:.06em; color:var(--color-ink-faint); margin-bottom:.5rem;">Anbefalt produkt</p>
+  <strong style="display:block; margin-bottom:.25rem; font-size:.95rem;">{{ recommendedProduct.name }}</strong>
+  {% if recommendedProduct.price %}
+    <div style="font-size:1.25rem; font-weight:700; margin-bottom:.75rem;">{{ recommendedProduct.price }} kr</div>
+  {% endif %}
+  <a href="{{ recommendedProduct.url }}" class="btn btn--primary" rel="nofollow sponsored" target="_blank" style="display:block; width:100%; text-align:center;">
+    Se pris og kjøp
+  </a>
+  {% if recommendedProduct.affiliate %}
+    <div class="affiliate-note" style="margin-top:.5rem;">(affiliatelenke)</div>
+  {% endif %}
+
+  {# Fase 2: Shopify Buy Button (kommentert ut)
+  <div id="shopify-product-{{ recommendedProduct.shopifyVariantId }}"></div>
+  #}
+</div>
+{% endif %}

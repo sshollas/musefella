@@ -1,0 +1,115 @@
+---
+layout: layouts/base.njk
+---
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ title }}",
+  "datePublished": "{{ date | isoDate }}",
+  "dateModified": "{{ (updated or date) | isoDate }}",
+  "author": { "@type": "Organization", "name": "{{ site.name }}" },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "logo": { "@type": "ImageObject", "url": "{{ site.url }}/assets/logo.png" }
+  },
+  "description": "{{ metaDescription }}"
+}
+</script>
+{% if steps %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{{ title }}",
+  "description": "{{ metaDescription }}",
+  "totalTime": "{{ timeRequired or 'PT1H' }}",
+  "step": [
+    {% for step in steps %}
+    {
+      "@type": "HowToStep",
+      "position": {{ loop.index }},
+      "name": "{{ step.name }}",
+      "text": "{{ step.text | replace('"', '\\"') }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% if faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in faq %}
+    {
+      "@type": "Question",
+      "name": "{{ item.q }}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{{ item.a | replace('"', '\\"') }}" }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
+<div class="container" style="padding-top:0; padding-bottom:4rem;">
+  {% set breadcrumb = [
+    { label: "Hjem", url: "/" },
+    { label: "Guider", url: "/guider/" },
+    { label: title }
+  ] %}
+  {% include "components/breadcrumb.njk" %}
+
+  <div class="article-layout">
+    <div class="article-content">
+      <header class="article-header">
+        <h1>{{ title }}</h1>
+        <div class="article-meta">
+          <span>Oppdatert {{ (updated or date) | readableDate }}</span>
+          <span class="meta-tag">Guide</span>
+          {% if difficulty %}
+            <span class="meta-tag">Vanskelighet: {{ difficulty }}</span>
+          {% endif %}
+          {% if timeRequired %}
+            <span>⏱ {{ timeRequired | replace("PT","") | lower }}</span>
+          {% endif %}
+        </div>
+      </header>
+
+      {{ content | safe }}
+
+      {% if faq %}
+        {% include "components/faq-block.njk" %}
+      {% endif %}
+    </div>
+
+    <aside class="article-sidebar">
+      {% if toc %}
+      <nav class="toc" aria-label="Innholdsfortegnelse">
+        <h3>Steg i guiden</h3>
+        <ol>
+          {% for item in toc %}
+          <li><a href="#{{ item.id }}">{{ item.label }}</a></li>
+          {% endfor %}
+        </ol>
+      </nav>
+      {% endif %}
+    </aside>
+  </div>
+</div>
+
+{# Fase 2: Brevo e-post skjema (kommentert ut — klar til aktivering)
+<section class="section section--alt" style="margin-top:3rem;">
+  <div class="container container--article">
+    <h2>Få skadedyrtips i innboksen</h2>
+    <p>Meld deg på nyhetsbrevet og få sesongvarsler og produktnyheter.</p>
+    <!-- Brevo embed script her -->
+  </div>
+</section>
+#}

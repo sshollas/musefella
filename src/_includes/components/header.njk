@@ -1,0 +1,32 @@
+<header class="site-header" role="banner">
+  <div class="container">
+    <div class="site-header__inner">
+      <a href="/" class="site-logo" aria-label="{{ site.name }} — hjem">
+        {{ site.name }}<span class="site-logo__dot">.</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Hovedmeny">
+        <a href="/skadedyr/">Skadedyr</a>
+        <a href="/guider/">Guider</a>
+        <a href="/produkter/">Produkter</a>
+        <a href="/kategorier/">Kategorier</a>
+        <a href="/om/">Om oss</a>
+      </nav>
+
+      <div class="site-header__search">
+        <form role="search" action="/sok/" method="get">
+          <input
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Søk skadedyr, produkter…"
+            aria-label="Søk på siden">
+        </form>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Åpne meny">
+        ☰
+      </button>
+    </div>
+  </div>
+</header>

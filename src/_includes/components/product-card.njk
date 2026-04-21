@@ -1,0 +1,31 @@
+{# Usage: {% set cardProduct = product %} {% include "components/product-card.njk" %} #}
+<div class="product-card">
+  <div class="product-card__img-wrap">
+    {% if cardProduct.image %}
+      <img src="{{ cardProduct.image }}" alt="{{ cardProduct.name }}" width="300" height="160" loading="lazy">
+    {% else %}
+      <span style="font-size:3rem;">📦</span>
+    {% endif %}
+  </div>
+  <div class="product-card__body">
+    <div class="product-card__name">{{ cardProduct.name }}</div>
+    <p class="product-card__description">{{ cardProduct.shortDescription }}</p>
+    <div class="product-card__footer">
+      {% if cardProduct.price %}
+        <span class="product-card__price">{{ cardProduct.price }} kr</span>
+      {% endif %}
+      {% if cardProduct.affiliateUrl %}
+        <a href="{{ cardProduct.affiliateUrl }}" class="btn btn--primary btn--sm" rel="nofollow sponsored" target="_blank">
+          Se pris
+        </a>
+      {% elif cardProduct.slug %}
+        <a href="/produkter/{{ cardProduct.slug }}/" class="btn btn--outline btn--sm">
+          Les anmeldelse
+        </a>
+      {% endif %}
+    </div>
+    {% if cardProduct.type == "affiliate" %}
+      <div class="affiliate-note">(affiliatelenke)</div>
+    {% endif %}
+  </div>
+</div>

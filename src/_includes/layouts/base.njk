@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} — {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ metaDescription or site.description }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="{{ ogType or 'article' }}">
+  <meta property="og:title" content="{{ title or site.name }}">
+  <meta property="og:description" content="{{ metaDescription or site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}/assets/og/{{ ogImage or 'default.jpg' }}">
+  <meta property="og:locale" content="nb_NO">
+  <meta property="og:site_name" content="{{ site.name }}">
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or site.name }}">
+  <meta name="twitter:description" content="{{ metaDescription or site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}/assets/og/{{ ogImage or 'default.jpg' }}">
+
+  <!-- Geo -->
+  <meta name="geo.region" content="NO">
+  <meta name="language" content="Norwegian">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  <!-- Structured data: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.name }}",
+    "url": "{{ site.url }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ site.url }}/sok/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  {% block schema %}{% endblock %}
+</head>
+<body>
+<div class="page-wrapper">
+
+  {% include "components/header.njk" %}
+
+  {% block trustBar %}{% endblock %}
+
+  <main id="main-content">
+    {{ content | safe }}
+  </main>
+
+  {% include "components/footer.njk" %}
+
+</div>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', nav.classList.contains('is-open'));
+    });
+  }
+
+  // Active nav link
+  document.querySelectorAll('.site-nav a').forEach(link => {
+    if (link.pathname === location.pathname ||
+        (link.pathname !== '/' && location.pathname.startsWith(link.pathname))) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+</script>
+
+</body>
+</html>

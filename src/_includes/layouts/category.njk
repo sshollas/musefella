@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+---
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ title }}",
+  "description": "{{ metaDescription }}",
+  "url": "{{ site.url }}{{ page.url }}"
+}
+</script>
+{% endblock %}
+
+<div class="category-hero">
+  <div class="container">
+    {% set breadcrumb = [
+      { label: "Hjem", url: "/" },
+      { label: "Kategorier", url: "/kategorier/" },
+      { label: title }
+    ] %}
+    {% include "components/breadcrumb.njk" %}
+    <h1 style="margin-top:.5rem;">{{ title }}</h1>
+    {% if metaDescription %}
+      <p class="text-muted" style="max-width:600px; margin-top:.5rem;">{{ metaDescription }}</p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="container" style="padding-top:2rem; padding-bottom:4rem;">
+  {{ content | safe }}
+</div>

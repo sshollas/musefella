@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+<div class="container container--article" style="padding-top: 2rem; padding-bottom: 4rem;">
+  {% if breadcrumb %}
+    {% include "components/breadcrumb.njk" %}
+  {% endif %}
+  <article class="article-content">
+    <header class="article-header">
+      <h1>{{ title }}</h1>
+    </header>
+    {{ content | safe }}
+  </article>
+</div>

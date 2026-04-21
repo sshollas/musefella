@@ -1,0 +1,100 @@
+---
+layout: layouts/base.njk
+---
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ productName or title }}",
+  "description": "{{ productDescription or metaDescription }}",
+  {% if productImage %}
+  "image": "{{ site.url }}{{ productImage }}",
+  {% endif %}
+  {% if rating %}
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ rating }}",
+    "reviewCount": "{{ reviewCount or 1 }}"
+  },
+  {% endif %}
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "NOK",
+    "price": "{{ price or 0 }}",
+    "availability": "https://schema.org/InStock",
+    "seller": { "@type": "Organization", "name": "{{ site.name }}" }
+  }
+}
+</script>
+{% if faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in faq %}
+    {
+      "@type": "Question",
+      "name": "{{ item.q }}",
+      "acceptedAnswer": { "@type": "Answer", "text": "{{ item.a | replace('"', '\\"') }}" }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
+
+<div class="container" style="padding-top:0; padding-bottom:4rem;">
+  {% set breadcrumb = [
+    { label: "Hjem", url: "/" },
+    { label: "Produkter", url: "/produkter/" },
+    { label: title }
+  ] %}
+  {% include "components/breadcrumb.njk" %}
+
+  <div class="article-layout">
+    <div class="article-content">
+      <header class="article-header">
+        <h1>{{ title }}</h1>
+        <div class="article-meta">
+          <span>Oppdatert {{ (updated or date) | readableDate }}</span>
+          <span class="meta-tag">Produktanmeldelse</span>
+        </div>
+      </header>
+
+      {{ content | safe }}
+
+      {% if faq %}
+        {% include "components/faq-block.njk" %}
+      {% endif %}
+    </div>
+
+    <aside class="article-sidebar">
+      {% if affiliateUrl %}
+      <div class="toc" style="text-align:center;">
+        {% if productImage %}
+          <img src="{{ productImage }}" alt="{{ productName or title }}" style="max-height:140px; object-fit:contain; margin: 0 auto .75rem;">
+        {% endif %}
+        {% if price %}
+          <div style="font-size:1.4rem; font-weight:700; margin-bottom:.25rem;">{{ price }} kr</div>
+        {% endif %}
+        <a href="{{ affiliateUrl }}" class="btn btn--primary" rel="nofollow sponsored" target="_blank" style="width:100%; text-align:center; display:block;">
+          Sjekk pris og kjøp
+        </a>
+        <div class="affiliate-note" style="margin-top:.5rem;">(affiliatelenke)</div>
+
+        {# Fase 2: Shopify Buy Button (kommentert ut — klar til aktivering)
+        <div id="product-component-{{ shopifyVariantId }}"></div>
+        <script type="text/javascript">
+        // ShopifyBuy.UI.onReady(client).then(function (ui) {
+        //   ui.createComponent('product', { id: '{{ shopifyVariantId }}', node: ... });
+        // });
+        </script>
+        #}
+      </div>
+      {% endif %}
+    </aside>
+  </div>
+</div>
