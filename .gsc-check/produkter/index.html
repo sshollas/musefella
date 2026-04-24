@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produkter | musefella.no</title>
+  <meta name="description" content="Produktseksjonen på musefella.no er midlertidig deaktivert.">
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://musefella.no/produkter/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Produkter">
+  <meta property="og:description" content="Produktseksjonen på musefella.no er midlertidig deaktivert.">
+  <meta property="og:url" content="https://musefella.no/produkter/">
+  <meta property="og:locale" content="nb_NO">
+  <meta property="og:site_name" content="musefella.no">
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Produkter">
+  <meta name="twitter:description" content="Produktseksjonen på musefella.no er midlertidig deaktivert.">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  
+</head>
+<body>
+<div class="page-wrapper">
+
+  <header class="site-header" role="banner">
+  <div class="container">
+    <div class="site-header__inner">
+      <a href="/" class="site-logo" aria-label="musefella.no — hjem">
+        musefella.no<span class="site-logo__dot">.</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Hovedmeny">
+        <a href="/skadedyr/">Skadedyr</a>
+        <a href="/guider/">Guider</a>
+        <a href="/kategorier/">Kategorier</a>
+        <a href="/om/">Om oss</a>
+      </nav>
+
+      <div class="site-header__search">
+        <form role="search" action="/sok/" method="get">
+          <input
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Søk skadedyr og guider…"
+            aria-label="Søk på siden">
+        </form>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Åpne meny">
+        ☰
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  
+
+  <main id="main-content">
+    <div class="container container--article" style="padding-top: 2rem; padding-bottom: 4rem;">
+  
+    
+<nav class="breadcrumb" aria-label="Brødsmulesti">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      
+        <a href="/" itemprop="item"><span itemprop="name">Hjem</span></a>
+      
+      <meta itemprop="position" content="1">
+    </li>
+    
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      
+        <span itemprop="name" aria-current="page">Produkter</span>
+      
+      <meta itemprop="position" content="2">
+    </li>
+    
+  </ol>
+</nav>
+
+
+  
+  <article class="article-content">
+    <header class="article-header">
+      <h1>Produkter</h1>
+    </header>
+    
+<p>Produktseksjonen er midlertidig deaktivert. Foreløpig publiserer musefella.no kun innholdssider, guider og artsider.</p>
+
+<p>Bruk i stedet disse inngangene:</p>
+<ul>
+  <li><a href="/skadedyr/">Alle skadedyr</a></li>
+  <li><a href="/guider/">Alle guider</a></li>
+  <li><a href="/kategorier/">Kategorier</a></li>
+</ul>
+
+  </article>
+</div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="site-logo">musefella.no</a>
+        <p>Praktiske råd og steg-for-steg-guider for skadedyrbekjempelse i norske hjem.</p>
+        <p style="margin-top:.75rem; font-size:.8rem; color:rgba(255,255,255,.45);">
+          Praktiske guider og forklarende innhold om skadedyr i norske hjem.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Skadedyr</h4>
+        <ul>
+          <li><a href="/skjeggkre/">Skjeggkre</a></li>
+          <li><a href="/solvkre/">Sølvkre</a></li>
+          <li><a href="/mus/">Mus</a></li>
+          <li><a href="/rotter/">Rotter</a></li>
+          <li><a href="/maur/">Maur</a></li>
+          <li><a href="/veggedyr/">Veggedyr</a></li>
+          <li><a href="/veps/">Veps</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Nyttig</h4>
+        <ul>
+          <li><a href="/guider/">Alle guider</a></li>
+          <li><a href="/om/">Om oss</a></li>
+          <li><a href="/kontakt/">Kontakt</a></li>
+          <li><a href="/personvern/">Personvern</a></li>
+          <li><a href="/sitemap/">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 musefella.no. Alle rettigheter forbeholdt.</p>
+    </div>
+  </div>
+</footer>
+
+
+</div>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', nav.classList.contains('is-open'));
+    });
+  }
+
+  // Active nav link
+  document.querySelectorAll('.site-nav a').forEach(link => {
+    if (link.pathname === location.pathname ||
+        (link.pathname !== '/' && location.pathname.startsWith(link.pathname))) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+</script>
+
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

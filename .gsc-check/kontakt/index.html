@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt oss | musefella.no</title>
+  <meta name="description" content="Ta kontakt med redaksjonen på musefella.no. Vi svarer på spørsmål om skadedyrbekjempelse og innholdsfeil.">
+  
+  <link rel="canonical" href="https://musefella.no/kontakt/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Kontakt oss">
+  <meta property="og:description" content="Ta kontakt med redaksjonen på musefella.no. Vi svarer på spørsmål om skadedyrbekjempelse og innholdsfeil.">
+  <meta property="og:url" content="https://musefella.no/kontakt/">
+  <meta property="og:locale" content="nb_NO">
+  <meta property="og:site_name" content="musefella.no">
+
+  <!-- Twitter/X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kontakt oss">
+  <meta name="twitter:description" content="Ta kontakt med redaksjonen på musefella.no. Vi svarer på spørsmål om skadedyrbekjempelse og innholdsfeil.">
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  
+</head>
+<body>
+<div class="page-wrapper">
+
+  <header class="site-header" role="banner">
+  <div class="container">
+    <div class="site-header__inner">
+      <a href="/" class="site-logo" aria-label="musefella.no — hjem">
+        musefella.no<span class="site-logo__dot">.</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Hovedmeny">
+        <a href="/skadedyr/">Skadedyr</a>
+        <a href="/guider/">Guider</a>
+        <a href="/kategorier/">Kategorier</a>
+        <a href="/om/">Om oss</a>
+      </nav>
+
+      <div class="site-header__search">
+        <form role="search" action="/sok/" method="get">
+          <input
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Søk skadedyr og guider…"
+            aria-label="Søk på siden">
+        </form>
+      </div>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Åpne meny">
+        ☰
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  
+
+  <main id="main-content">
+    <div class="container container--article" style="padding-top: 2rem; padding-bottom: 4rem;">
+  
+    
+<nav class="breadcrumb" aria-label="Brødsmulesti">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      
+        <a href="/" itemprop="item"><span itemprop="name">Hjem</span></a>
+      
+      <meta itemprop="position" content="1">
+    </li>
+    
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      
+        <span itemprop="name" aria-current="page">Kontakt</span>
+      
+      <meta itemprop="position" content="2">
+    </li>
+    
+  </ol>
+</nav>
+
+
+  
+  <article class="article-content">
+    <header class="article-header">
+      <h1>Kontakt oss</h1>
+    </header>
+    
+<p>Vi hører gjerne fra deg — enten det er spørsmål om skadedyrbekjempelse, feil i innholdet vårt, eller innspill til hva vi bør dekke bedre.</p>
+
+<form id="kontakt-form" style="margin: 2rem 0;" novalidate>
+  <div style="display:grid; gap:1rem;">
+
+    <div>
+      <label for="navn" style="display:block; font-weight:600; margin-bottom:.3rem;">Navn <span aria-hidden="true">*</span></label>
+      <input type="text" id="navn" name="navn" required autocomplete="name"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem;">
+    </div>
+
+    <div>
+      <label for="epost" style="display:block; font-weight:600; margin-bottom:.3rem;">E-post <span aria-hidden="true">*</span></label>
+      <input type="email" id="epost" name="epost" required autocomplete="email"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem;">
+    </div>
+
+    <div>
+      <label for="emne" style="display:block; font-weight:600; margin-bottom:.3rem;">Emne</label>
+      <input type="text" id="emne" name="emne" autocomplete="off"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem;">
+    </div>
+
+    <div>
+      <label for="melding" style="display:block; font-weight:600; margin-bottom:.3rem;">Melding <span aria-hidden="true">*</span></label>
+      <textarea id="melding" name="melding" required rows="5"
+        style="width:100%; padding:.6rem .85rem; border:1px solid var(--color-border); border-radius:var(--radius); font-family:var(--font-sans); font-size:1rem; resize:vertical;"></textarea>
+    </div>
+
+    <div id="kontakt-status" role="alert" aria-live="polite" style="display:none;"></div>
+
+    <div>
+      <button type="submit" class="btn btn--primary" id="kontakt-submit">Send melding</button>
+    </div>
+  </div>
+</form>
+
+<script>
+(function () {
+  const form = document.getElementById('kontakt-form');
+  const status = document.getElementById('kontakt-status');
+  const submit = document.getElementById('kontakt-submit');
+
+  function showStatus(message, isError) {
+    status.textContent = message;
+    status.style.display = 'block';
+    status.style.padding = '.75rem 1rem';
+    status.style.borderRadius = 'var(--radius)';
+    status.style.fontSize = '.9rem';
+    if (isError) {
+      status.style.background = 'var(--color-warning-bg)';
+      status.style.color = '#7a2c18';
+    } else {
+      status.style.background = 'var(--color-accent-bg)';
+      status.style.color = '#1a4033';
+    }
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    status.style.display = 'none';
+    submit.disabled = true;
+    submit.textContent = 'Sender…';
+
+    const body = {
+      navn: form.navn.value.trim(),
+      epost: form.epost.value.trim(),
+      emne: form.emne.value.trim(),
+      melding: form.melding.value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/kontakt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        form.reset();
+        showStatus('Takk! Meldingen din er sendt. Vi svarer innen 2–3 virkedager.', false);
+      } else {
+        showStatus(data.error || 'Noe gikk galt. Prøv igjen.', true);
+      }
+    } catch {
+      showStatus('Nettverksfeil. Sjekk tilkoblingen og prøv igjen.', true);
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Send melding';
+    }
+  });
+})();
+</script>
+
+<h2>Hva vi kan hjelpe med</h2>
+<ul>
+  <li>Spørsmål om skadedyrbekjempelse og innholdet på siden</li>
+  <li>Feil eller utdatert informasjon på siden</li>
+  <li>Temaer og problemstillinger vi bør dekke bedre</li>
+  <li>Samarbeid og mediainspørsel</li>
+</ul>
+
+<h2>Hva vi ikke kan hjelpe med</h2>
+<ul>
+  <li>Direkte diagnose av skadedyrproblem (vi er ikke sertifiserte skadedyrbekjempere)</li>
+  <li>Anbefalinger av bestemte lokale skadedyrfirmaer</li>
+</ul>
+
+<div class="alert alert--info">
+  <strong>Alvorlig skadedyrproblem?</strong> Kontakt et lokalt skadedyrfirma direkte. Finn godkjente firma via <a href="https://www.skadedyrlauget.no" target="_blank" rel="noopener">Skadedyrlauget</a>.
+</div>
+
+  </article>
+</div>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="site-logo">musefella.no</a>
+        <p>Praktiske råd og steg-for-steg-guider for skadedyrbekjempelse i norske hjem.</p>
+        <p style="margin-top:.75rem; font-size:.8rem; color:rgba(255,255,255,.45);">
+          Praktiske guider og forklarende innhold om skadedyr i norske hjem.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Skadedyr</h4>
+        <ul>
+          <li><a href="/skjeggkre/">Skjeggkre</a></li>
+          <li><a href="/solvkre/">Sølvkre</a></li>
+          <li><a href="/mus/">Mus</a></li>
+          <li><a href="/rotter/">Rotter</a></li>
+          <li><a href="/maur/">Maur</a></li>
+          <li><a href="/veggedyr/">Veggedyr</a></li>
+          <li><a href="/veps/">Veps</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Nyttig</h4>
+        <ul>
+          <li><a href="/guider/">Alle guider</a></li>
+          <li><a href="/om/">Om oss</a></li>
+          <li><a href="/kontakt/">Kontakt</a></li>
+          <li><a href="/personvern/">Personvern</a></li>
+          <li><a href="/sitemap/">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 musefella.no. Alle rettigheter forbeholdt.</p>
+    </div>
+  </div>
+</footer>
+
+
+</div>
+
+<script>
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.site-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', nav.classList.contains('is-open'));
+    });
+  }
+
+  // Active nav link
+  document.querySelectorAll('.site-nav a').forEach(link => {
+    if (link.pathname === location.pathname ||
+        (link.pathname !== '/' && location.pathname.startsWith(link.pathname))) {
+      link.setAttribute('aria-current', 'page');
+    }
+  });
+</script>
+
+
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

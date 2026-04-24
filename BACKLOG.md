@@ -1,6 +1,6 @@
 # Forbedringsbacklog
 
-Sist oppdatert: 2026-04-21
+Sist oppdatert: 2026-04-24
 
 Denne backloggen er basert på gjennomgang av funksjon, innhold, SEO og GEO/AI-synlighet i prosjektet.
 
@@ -44,14 +44,14 @@ Akseptansekriterier:
 
 Problemsteder og løsning:
 - [src/robots.txt](/Users/sondre/Documents/GitHub/musefella/src/robots.txt:1)
-  Problem: `Disallow: /personvern/` er satt uten at det er åpenbart hvorfor.
-  Løsning: fjern dette hvis personvernsiden skal være offentlig og lesbar for søkemotorer.
+  Problem: `Disallow: /personvern/` var satt uten at det var åpenbart hvorfor.
+  Løsning: fjernet, slik at personvernsiden kan crawles som vanlig.
 - [src/sitemap.xml.njk](/Users/sondre/Documents/GitHub/musefella/src/sitemap.xml.njk:1)
   Problem: sitemapen er ryddig nå, men bør kontrolleres mot endelig indeksstrategi før innsending.
   Løsning: hold kun sider dere faktisk vil ha indeksert i sitemapen.
 - [src/pages/produkter.njk](/Users/sondre/Documents/GitHub/musefella/src/pages/produkter.njk:1) og `src/produkter/*.njk`
-  Problem: produktsidene er fortsatt publisert, men med `noindex`.
-  Løsning: bestem om disse skal forbli tilgjengelige med `noindex`, eller om de skal tas helt ut av builden mens siden er ren innholdsside.
+  Problem: produktsidene var fortsatt publisert, men med `noindex`.
+  Løsning: de individuelle produktsidene er tatt ut av builden. `/produkter/` kan stå som midlertidig infoside så lenge den fortsatt er `noindex`.
 
 Akseptansekriterier:
 - `robots.txt`, sitemap og canonical-strategi er bevisst avklart.
@@ -67,13 +67,13 @@ Akseptansekriterier:
 Problemsteder og løsning:
 - [src/_includes/layouts/product.njk](/Users/sondre/Documents/GitHub/musefella/src/_includes/layouts/product.njk:4)
   Problem: siden rendrer fortsatt `Product`-schema, produktmetadata og affiliate-knapp.
-  Løsning: fjern `Product`-schema og CTA-er hvis produktsidene bare skal være parkert.
+  Løsning: vurder å forenkle eller slette denne layouten helt hvis produktsidene skal forbli avpublisert over tid.
 - [src/_data/products.json](/Users/sondre/Documents/GitHub/musefella/src/_data/products.json:1)
   Problem: inneholder fortsatt placeholder-affiliate-URL-er, pris, rating og produktpåstander.
-  Løsning: flytt ut av aktiv dataflyt eller merk tydelig som inaktivt innhold.
+  Løsning: behold kun som intern arbeidsdata eller fjern helt hvis produktsporet ikke skal tilbake snart.
 - [src/_data/pests.json](/Users/sondre/Documents/GitHub/musefella/src/_data/pests.json:1)
-  Problem: `recommendedProduct` ligger fortsatt igjen på flere arter.
-  Løsning: fjern feltet hvis produktsystemet ikke skal brukes nå.
+  Problem: `recommendedProduct` lå igjen på flere arter.
+  Løsning: fjernet feltet fra datasettet.
 
 Akseptansekriterier:
 - Siden fremstår konsekvent som en innholdsside uten skjulte rester av affiliate-/produktsystemet.
@@ -167,8 +167,8 @@ Problemsteder som allerede er identifisert:
 
 Problemsteder og løsning:
 - [src/_includes/layouts/base.njk](/Users/sondre/Documents/GitHub/musefella/src/_includes/layouts/base.njk:26)
-  Problem: `geo.region` og `language` ligger fortsatt i base-layouten.
-  Løsning: fjern disse meta-tagene og fokuser på innhold, språk på `<html>` og ryddige canonicals.
+  Problem: `geo.region` og `language` lå fortsatt i base-layouten.
+  Løsning: fjernet disse meta-tagene og beholdt kun standardmetaer som faktisk brukes.
 
 Akseptansekriterier:
 - `<head>` inneholder bare metadata dere faktisk har en tydelig grunn til å sende ut.

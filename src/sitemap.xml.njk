@@ -12,7 +12,7 @@ eleventyExcludeFromCollections: true
   {% for page in collections.skadedyr %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
-    <lastmod>{{ page.data.updated or page.data.date | isoDate }}</lastmod>
+    <lastmod>{{ (page.data.updated or page.data.date) | isoDate }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -20,7 +20,7 @@ eleventyExcludeFromCollections: true
   {% for page in collections.guider %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
-    <lastmod>{{ page.data.updated or page.data.date | isoDate }}</lastmod>
+    <lastmod>{{ (page.data.updated or page.data.date) | isoDate }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
