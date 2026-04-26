@@ -1,32 +1,85 @@
 # Forbedringsbacklog
 
-Sist oppdatert: 2026-04-24
+Sist oppdatert: 2026-04-26
 
 Denne backloggen er basert på gjennomgang av funksjon, innhold, SEO og GEO/AI-synlighet i prosjektet.
 
 ## Må fikses nå
 
-### 2. Legg inn manglende bilder og delingsassets
-- Opprett eller legg inn alle refererte bilder under `src/assets/`.
+### 3. Fullfør verifisering og innsending i Google Search Console
+- Legg DNS-verifiseringsposten på rotdomenet `musefella.no`, ikke på et subdomene.
+- Bekreft domenet i GSC etter at TXT-posten har propagert.
+- Send inn `https://musefella.no/sitemap.xml` i GSC.
+- Kjør URL Inspection på:
+  - `/`
+  - `/skjeggkre/`
+  - `/mus/`
+  - `/guider/bli-kvitt-skjeggkre/`
+
+Problemsteder og løsning:
+- DNS i Vercel
+  Problem: TXT-posten ble lagt som `gsc`, som normalt betyr `gsc.musefella.no`, ikke `musefella.no`.
+  Løsning: legg Google-verifiseringen som `TXT` på `@` eller tom host, avhengig av Vercel-grensesnittet.
+- Google Search Console
+  Problem: domenet blir ikke verifisert hvis TXT-posten ligger på feil navn, selv om verdien er riktig.
+  Løsning: bruk samme verdi, men på rotdomenet.
+
+Akseptansekriterier:
+- GSC bekrefter domeneeierskap for `musefella.no`.
+- `sitemap.xml` er innsendt i GSC.
+- Minst hjemside og 2-3 prioriterte URL-er er inspisert i GSC uten grunnleggende tekniske feil.
+
+### 4. Legg inn manglende bilder og delingsassets
+- Midlertidig bildeløs baseline er på plass for å unngå brutte offentlige bildelenker på sentrale sider.
+- Neste steg er å legge inn faktiske bilder og så reaktivere bildemeta kontrollert.
 - Sørg spesielt for:
-  - `assets/img/*` for skadedyr- og produktkort
+  - `assets/img/*` for skadedyrkort
   - `assets/og/default.jpg`
   - `assets/og/skjeggkre.jpg`
   - `assets/logo.png`
   - `assets/img/placeholder.jpg`
-- Verifiser at passthrough-copy faktisk publiserer filene til `_site/assets/`.
 
-Berørte filer:
-- `src/_includes/layouts/base.njk`
-- `src/_includes/layouts/pest.njk`
-- `src/_data/pests.json`
-- `src/_data/products.json`
+Problemsteder og løsning:
+- [src/_includes/layouts/base.njk](/Users/sondre/Documents/GitHub/musefella/src/_includes/layouts/base.njk:11)
+  Problem: `og:image` og `twitter:image` er midlertidig fjernet for å unngå døde URL-er.
+  Løsning: legg inn faktiske assets før disse feltene aktiveres igjen.
+- [src/_includes/layouts/pest.njk](/Users/sondre/Documents/GitHub/musefella/src/_includes/layouts/pest.njk:4) og [guide.njk](/Users/sondre/Documents/GitHub/musefella/src/_includes/layouts/guide.njk:4)
+  Problem: publisher-logo i schema er midlertidig fjernet fordi `assets/logo.png` mangler.
+  Løsning: legg inn logo og reaktiver når filen finnes.
+- [src/_data/pests.json](/Users/sondre/Documents/GitHub/musefella/src/_data/pests.json:1)
+  Problem: bildefeltene er midlertidig fjernet slik at kortene bruker ikoner i stedet.
+  Løsning: legg inn faktiske bilder og gjeninnfør `image`-feltene når assetene er på plass.
 
 Akseptansekriterier:
 - Ingen `img`, `og:image`, `twitter:image` eller logo-URL-er peker til manglende filer.
-- Forside, produktsider og delingskort viser faktiske bilder.
+- Skadedyrkort, delingskort og organisasjonssignaler kan bruke ekte bilder uten brutte referanser.
 
-### 3. Klargjør siden for innsending til Google Search Console
+### 5. Rydd bort de siste produktrestene hvis siden skal være ren innholdsside
+- De individuelle produktsidene er tatt ut av builden.
+- `/produkter/` står igjen som midlertidig `noindex` infoside.
+- Neste steg er å avgjøre om produktsporet skal:
+  - fjernes helt fra repoet
+  - eller beholdes som parkert arbeid under intern bruk
+
+Problemsteder og løsning:
+- [src/pages/produkter.njk](/Users/sondre/Documents/GitHub/musefella/src/pages/produkter.njk:1)
+  Problem: siden er fortsatt offentlig tilgjengelig som `noindex`.
+  Løsning: behold den som infoside, eller fjern den helt hvis dere vil ha null produktspor ute.
+- [src/_includes/layouts/product.njk](/Users/sondre/Documents/GitHub/musefella/src/_includes/layouts/product.njk:1)
+  Problem: layouten finnes fortsatt selv om produktsidene ikke bygges.
+  Løsning: vurder å slette eller parkere hele layouten hvis produktsporet skal være ute lenge.
+- [src/_data/products.json](/Users/sondre/Documents/GitHub/musefella/src/_data/products.json:1)
+  Problem: inneholder fortsatt placeholder-affiliate-URL-er, pris, rating og produktpåstander.
+  Løsning: behold kun som intern arbeidsdata eller fjern helt hvis produktsporet ikke skal tilbake snart.
+
+Akseptansekriterier:
+- Siden fremstår konsekvent som en ren innholdsside.
+- Ingen offentlig bygde sider peker til gamle produktsider.
+- Ingen unødige kommersielle signaler står igjen i aktiv publisert flyt.
+
+## Ferdig nå
+
+### Teknisk baseline før GSC
 - Kjør en siste teknisk sjekk før innsending:
   - verifiser at `robots.txt` er bevisst og riktig
   - verifiser at `sitemap.xml` kun inneholder sider som faktisk skal kunne indekseres
@@ -47,8 +100,8 @@ Problemsteder og løsning:
   Problem: `Disallow: /personvern/` var satt uten at det var åpenbart hvorfor.
   Løsning: fjernet, slik at personvernsiden kan crawles som vanlig.
 - [src/sitemap.xml.njk](/Users/sondre/Documents/GitHub/musefella/src/sitemap.xml.njk:1)
-  Problem: sitemapen er ryddig nå, men bør kontrolleres mot endelig indeksstrategi før innsending.
-  Løsning: hold kun sider dere faktisk vil ha indeksert i sitemapen.
+  Problem: sitemapen måtte kontrolleres mot endelig indeksstrategi og få riktig datoutdata.
+  Løsning: sitemapen er kontrollert mot bygde sider, og datofilteret er oppdatert i [.eleventy.js](/Users/sondre/Documents/GitHub/musefella/.eleventy.js:1).
 - [src/pages/produkter.njk](/Users/sondre/Documents/GitHub/musefella/src/pages/produkter.njk:1) og `src/produkter/*.njk`
   Problem: produktsidene var fortsatt publisert, men med `noindex`.
   Løsning: de individuelle produktsidene er tatt ut av builden. `/produkter/` kan stå som midlertidig infoside så lenge den fortsatt er `noindex`.
@@ -58,7 +111,7 @@ Akseptansekriterier:
 - Det finnes ingen tvetydighet om hvilke URL-er Google skal og ikke skal indeksere.
 - De viktigste URL-ene kan inspiseres i GSC uten å avdekke grunnleggende tekniske feil.
 
-### 4. Rydd bort produktrester hvis siden skal være ren innholdsside
+### Innholds- og metadataopprydding
 - Fjern eller parker rester av produktsystemet som fortsatt ligger i data, schema og templates.
 - Vurder to mulige retninger:
   - behold produktfilene internt, men stopp publisering helt
@@ -161,7 +214,7 @@ Problemsteder som allerede er identifisert:
 - [maur.njk](/Users/sondre/Documents/GitHub/musefella/src/skadedyr/maur.njk:3)
 - [veps.njk](/Users/sondre/Documents/GitHub/musefella/src/skadedyr/veps.njk:3)
 
-### 10. Fjern foreldede eller svake SEO-metaer
+### Fjern foreldede eller svake SEO-metaer
 - Fjern gamle geo-metaer som ikke gir tydelig SEO-verdi.
 - Behold heller ryddige standardmetaer, canonicals og tydelig språk.
 
@@ -201,11 +254,11 @@ Akseptansekriterier:
 
 ## Anbefalt rekkefølge
 
-1. Fiks manglende assets.
-2. Avklar GSC-klargjøring: `robots.txt`, sitemap, canonical og indeksstrategi.
-3. Rydd bort produktrester eller ta produktsidene helt ut.
-4. Standardiser resterende metadata og fjern gamle geo-metaer.
-5. Bygg E-E-A-T og kvalitetskontroller.
+1. Legg Google-verifisering på rotdomenet og fullfør GSC-innsending.
+2. Legg inn faktiske bilder og delingsassets.
+3. Bestem om `/produkter/` skal beholdes som `noindex` infoside eller fjernes helt.
+4. Bygg E-E-A-T på de viktigste sidene.
+5. Legg inn en enkel prepublish-kontroll for lenker og assets.
 
 ## Definisjon av ferdig for fase 1
 
@@ -215,4 +268,4 @@ Fase 1 er ferdig når:
 - forsiden og `Om oss` ikke lover ting dere ikke dokumenterer
 - toppsidene er språkvasket for de mest risikable fag- og tillitspåstandene
 - produkter enten er reelt parkert eller bevisst håndtert som `noindex`
-- `robots.txt`, sitemap og canonicals er kontrollert før GSC-innsending
+- GSC er verifisert og sitemap er sendt inn
