@@ -19,12 +19,12 @@ module.exports = function(eleventyConfig) {
 
   // Collections
   eleventyConfig.addCollection("skadedyr", api =>
-    api.getFilteredByGlob("src/skadedyr/*.njk").sort((a, b) =>
-      (b.data.priority || 0) - (a.data.priority || 0)
-    )
+    api.getFilteredByGlob("src/skadedyr/**/*.njk")
+      .filter(item => item.data.layout !== "layouts/guide.njk")
+      .sort((a, b) => (b.data.priority || 0) - (a.data.priority || 0))
   );
   eleventyConfig.addCollection("guider", api =>
-    api.getFilteredByGlob("src/guider/*.njk")
+    api.getAll().filter(item => item.data.layout === "layouts/guide.njk")
   );
   eleventyConfig.addCollection("produkter", api =>
     api.getFilteredByGlob("src/produkter/*.njk")
