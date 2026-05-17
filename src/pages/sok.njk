@@ -44,6 +44,44 @@ breadcrumb:
 
 <section class="search-section section" data-search-section>
   <div class="section__header">
+    <h2 class="section__title">Bolig og ansvar</h2>
+  </div>
+  <div class="guide-list">
+    {% for item in collections.ansvar %}
+    <div data-search-item data-search-text="{{ item.data.title | lower }} {{ item.data.metaDescription | default('') | lower }}">
+      <a href="{{ item.url }}" class="guide-item">
+        <span class="guide-item__icon">§</span>
+        <div>
+          <div class="guide-item__title">{{ item.data.title }}</div>
+          <div class="guide-item__meta">Ansvar og dokumentasjon</div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="search-section section" data-search-section>
+  <div class="section__header">
+    <h2 class="section__title">Identifisering</h2>
+  </div>
+  <div class="guide-list">
+    {% for item in collections.diagnose %}
+    <div data-search-item data-search-text="{{ item.data.title | lower }} {{ item.data.metaDescription | default('') | lower }}">
+      <a href="{{ item.url }}" class="guide-item">
+        <span class="guide-item__icon">?</span>
+        <div>
+          <div class="guide-item__title">{{ item.data.title }}</div>
+          <div class="guide-item__meta">Diagnose</div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="search-section section" data-search-section>
+  <div class="section__header">
     <h2 class="section__title">Guider</h2>
   </div>
   <div class="guide-list">
@@ -76,6 +114,41 @@ breadcrumb:
       </a>
     </div>
     {% endfor %}
+  </div>
+</section>
+
+<section class="search-section section" data-search-section>
+  <div class="section__header">
+    <h2 class="section__title">Om siden</h2>
+  </div>
+  <div class="guide-list">
+    <div data-search-item data-search-text="om musefella redaksjon innhold kilder kontakt">
+      <a href="/om/" class="guide-item">
+        <span class="guide-item__icon">i</span>
+        <div>
+          <div class="guide-item__title">Om Musefella</div>
+          <div class="guide-item__meta">Om siden</div>
+        </div>
+      </a>
+    </div>
+    <div data-search-item data-search-text="redaksjonelle retningslinjer faktasjekk oppdateringer rettelser">
+      <a href="/redaksjonelle-retningslinjer/" class="guide-item">
+        <span class="guide-item__icon">i</span>
+        <div>
+          <div class="guide-item__title">Redaksjonelle retningslinjer</div>
+          <div class="guide-item__meta">Om siden</div>
+        </div>
+      </a>
+    </div>
+    <div data-search-item data-search-text="kilder faglige referanser fhi mattilsynet artsdatabanken lovdata">
+      <a href="/kilder/" class="guide-item">
+        <span class="guide-item__icon">i</span>
+        <div>
+          <div class="guide-item__title">Kilder og faglige referanser</div>
+          <div class="guide-item__meta">Om siden</div>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 

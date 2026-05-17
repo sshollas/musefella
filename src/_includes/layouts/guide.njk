@@ -7,12 +7,30 @@ layout: layouts/base.njk
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "{{ title }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "image": "{{ site.url }}{{ ogImage or site.defaultOgImage }}",
+  "inLanguage": "nb",
   "datePublished": "{{ date | isoDate }}",
   "dateModified": "{{ (updated or date) | isoDate }}",
   "author": { "@type": "Organization", "name": "{{ site.name }}" },
   "publisher": {
     "@type": "Organization",
-    "name": "{{ site.name }}"
+    "name": "{{ site.name }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}{{ site.logo }}"
+    }
+  },
+  {% if parentUrl %}
+  "isPartOf": {
+    "@type": "WebPage",
+    "name": {{ parentLabel | jsonString | safe }},
+    "url": "{{ site.url }}{{ parentUrl }}"
+  },
+  {% endif %}
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".summary-box", "section#kort p:first-child"]
   },
   "description": "{{ metaDescription }}"
 }
@@ -23,6 +41,7 @@ layout: layouts/base.njk
   "@context": "https://schema.org",
   "@type": "HowTo",
   "name": "{{ title }}",
+  "url": "{{ site.url }}{{ page.url }}",
   "description": "{{ metaDescription }}",
   "totalTime": "{{ timeRequired or 'PT1H' }}",
   "step": [
@@ -38,12 +57,32 @@ layout: layouts/base.njk
 }
 </script>
 {% endif %}
+{% if faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in faq %}
+    {
+      "@type": "Question",
+      "name": {{ item.q | jsonString | safe }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ item.a | jsonString | safe }}
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
 {% endblock %}
 
 <div class="container" style="padding-top:0; padding-bottom:4rem;">
   {% set breadcrumb = [
     { label: "Hjem", url: "/" },
-    { label: "Guider", url: "/guider/" },
+    { label: parentLabel or "Guider", url: parentUrl or "/guider/" },
     { label: title }
   ] %}
   {% include "components/breadcrumb.njk" %}

@@ -26,6 +26,14 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("guider", api =>
     api.getAll().filter(item => item.data.layout === "layouts/guide.njk")
   );
+  eleventyConfig.addCollection("diagnose", api =>
+    api.getFilteredByGlob("src/diagnose/**/*.njk")
+      .sort((a, b) => (b.data.priority || 0) - (a.data.priority || 0))
+  );
+  eleventyConfig.addCollection("ansvar", api =>
+    api.getFilteredByGlob("src/ansvar/**/*.njk")
+      .sort((a, b) => (b.data.priority || 0) - (a.data.priority || 0))
+  );
   eleventyConfig.addCollection("produkter", api =>
     api.getFilteredByGlob("src/produkter/*.njk")
   );
@@ -41,6 +49,12 @@ module.exports = function(eleventyConfig) {
     toDateTime(date).toISODate()
   );
   eleventyConfig.addFilter("limit", (arr, n) => arr.slice(0, n));
+  eleventyConfig.addFilter("jsonString", value =>
+    JSON.stringify(value || "")
+  );
+  eleventyConfig.addFilter("withoutUrl", (arr, url) =>
+    (arr || []).filter(item => item.url !== url)
+  );
 
   return {
     dir: { input: "src", output: "_site", includes: "_includes" },

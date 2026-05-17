@@ -6,6 +6,7 @@
   <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} — {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ metaDescription or site.description }}">
   {% if noindex %}<meta name="robots" content="noindex,follow">{% endif %}
+  {% set shareImage = ogImage or site.defaultOgImage %}
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
   <!-- Open Graph -->
@@ -13,13 +14,15 @@
   <meta property="og:title" content="{{ title or site.name }}">
   <meta property="og:description" content="{{ metaDescription or site.description }}">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}{{ shareImage }}">
   <meta property="og:locale" content="nb_NO">
   <meta property="og:site_name" content="{{ site.name }}">
 
   <!-- Twitter/X -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ title or site.name }}">
   <meta name="twitter:description" content="{{ metaDescription or site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ shareImage }}">
 
   <link rel="stylesheet" href="/assets/css/main.css">
 

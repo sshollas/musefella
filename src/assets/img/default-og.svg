@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Musefella</title>
+  <desc id="desc">Praktiske råd om skadedyr i norske hjem.</desc>
+  <rect width="1200" height="630" fill="#f6f2e8"/>
+  <rect x="72" y="72" width="1056" height="486" rx="32" fill="#1f3a32"/>
+  <text x="132" y="245" fill="#f6f2e8" font-family="Arial, Helvetica, sans-serif" font-size="82" font-weight="700">musefella.no</text>
+  <text x="132" y="335" fill="#f6f2e8" font-family="Arial, Helvetica, sans-serif" font-size="42">Skadedyr i norske hjem</text>
+  <text x="132" y="414" fill="#d69f45" font-family="Arial, Helvetica, sans-serif" font-size="32">Identifisering • tiltak • ansvar</text>
+  <circle cx="930" cy="306" r="92" fill="#f6f2e8"/>
+  <circle cx="898" cy="286" r="12" fill="#1f3a32"/>
+  <circle cx="962" cy="286" r="12" fill="#1f3a32"/>
+  <path d="M910 328c14 10 28 10 42 0" fill="none" stroke="#1f3a32" stroke-width="10" stroke-linecap="round"/>
+</svg>

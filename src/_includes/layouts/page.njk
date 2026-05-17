@@ -1,6 +1,62 @@
 ---
 layout: layouts/base.njk
 ---
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ schemaType or 'WebPage' }}",
+  "name": {{ title | jsonString | safe }},
+  "url": "{{ site.url }}{{ page.url }}",
+  "description": {{ (metaDescription or site.description) | jsonString | safe }},
+  "inLanguage": "nb",
+  {% if updated or date %}
+  "dateModified": "{{ (updated or date) | isoDate }}",
+  {% endif %}
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.name }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}{{ site.logo }}"
+    }
+  }{% if collectionName %},
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% set listItems = collections[collectionName] | withoutUrl(page.url) %}
+      {% for item in listItems %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "name": {{ item.data.title | jsonString | safe }},
+        "url": "{{ site.url }}{{ item.url }}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }{% endif %}
+}
+</script>
+{% if sources %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Kilder og faglige referanser",
+  "itemListElement": [
+    {% for source in sources %}
+    {
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "name": {{ source.name | jsonString | safe }},
+      "url": "{{ source.url }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+{% endblock %}
 <div class="container container--article" style="padding-top: 2rem; padding-bottom: 4rem;">
   {% if breadcrumb %}
     {% include "components/breadcrumb.njk" %}
@@ -8,6 +64,11 @@ layout: layouts/base.njk
   <article class="article-content">
     <header class="article-header">
       <h1>{{ title }}</h1>
+      {% if updated or date %}
+      <div class="article-meta">
+        <span>Oppdatert {{ (updated or date) | readableDate }}</span>
+      </div>
+      {% endif %}
     </header>
     {{ content | safe }}
   </article>

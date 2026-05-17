@@ -4,6 +4,8 @@
   "url": "https://musefella.no",
   "description": "Praktiske råd og steg-for-steg-guider for skadedyrbekjempelse i norske hjem.",
   "locale": "nb_NO",
+  "defaultOgImage": "/assets/img/default-og.svg",
+  "logo": "/assets/img/logo.svg",
   "author": "Redaksjonen",
   "contactEmail": "hei@musefella.no",
   "affiliateDisclaimer": "Musefella.no publiserer for tiden ikke affiliate- eller produktsider.",

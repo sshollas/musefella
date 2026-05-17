@@ -15,6 +15,20 @@ breadcrumb:
   {% endfor %}
 </ul>
 
+<h2>Identifisering</h2>
+<ul>
+  {% for item in collections.diagnose %}
+  <li><a href="{{ item.url }}">{{ item.data.title }}</a></li>
+  {% endfor %}
+</ul>
+
+<h2>Bolig og ansvar</h2>
+<ul>
+  {% for item in collections.ansvar %}
+  <li><a href="{{ item.url }}">{{ item.data.title }}</a></li>
+  {% endfor %}
+</ul>
+
 <h2>Guider</h2>
 <ul>
   {% for guide in collections.guider %}
@@ -32,5 +46,7 @@ breadcrumb:
 <h2>Om siden</h2>
 <ul>
   <li><a href="/om/">Om musefella.no</a></li>
+  <li><a href="/redaksjonelle-retningslinjer/">Redaksjonelle retningslinjer</a></li>
+  <li><a href="/kilder/">Kilder og faglige referanser</a></li>
   <li><a href="/kontakt/">Kontakt</a></li>
 </ul>

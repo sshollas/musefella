@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Musefella logo</title>
+  <rect width="512" height="512" rx="96" fill="#1f3a32"/>
+  <path d="M128 292c0-69 57-126 128-126s128 57 128 126v28H128v-28Z" fill="#f6f2e8"/>
+  <path d="M178 212c-23-37-12-73 21-96 11 30 36 47 70 55" fill="none" stroke="#f6f2e8" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="212" cy="262" r="14" fill="#1f3a32"/>
+  <circle cx="300" cy="262" r="14" fill="#1f3a32"/>
+  <path d="M232 302c16 10 32 10 48 0" fill="none" stroke="#1f3a32" stroke-width="14" stroke-linecap="round"/>
+  <path d="M146 350h220" stroke="#d69f45" stroke-width="26" stroke-linecap="round"/>
+</svg>
